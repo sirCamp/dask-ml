@@ -571,7 +571,7 @@ def _kmeans_single_lloyd(
     )
     dt = X.dtype
     P = X.shape[1]
-    for i in range(max_iter):
+    for i in tqdm(range(max_iter)):
         with _timer("Lloyd loop %2d." % i, _logger=logger):
             labels, distances = pairwise_distances_argmin_min(
                 X, centers, metric="euclidean", metric_kwargs={"squared": True}
