@@ -11,7 +11,7 @@ from dask import compute
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.extmath import squared_norm
 from sklearn.utils.validation import check_is_fitted
-
+from tqdm import tqdm
 from .._compat import blockwise
 from .._utils import draw_seed
 from ..metrics import (
@@ -464,7 +464,7 @@ def init_scalable(
         n_iter = min(max_iter, n_iter)
 
     # Steps 3 - 6: update candidate Centers
-    for i in range(n_iter):
+    for i in tqdm(range(n_iter)):
         with _timer(
             "init iteration %2d/%2d , %2d centers" % (i + 1, n_iter, len(c_idx)),
             _logger=logger,
